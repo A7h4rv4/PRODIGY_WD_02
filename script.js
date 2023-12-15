@@ -1,9 +1,7 @@
-let hours = 0;
 let minutes = 0;
 let seconds = 0;
 let miliseconds = 0;
 
-let displayHours = hours;
 let displayMinutes = minutes;
 let displaySeconds = seconds;
 let displayMiliseconds = miliseconds;
@@ -16,7 +14,6 @@ let lapNow = null;
 const startBtn = document.getElementById("startBtn");
 const resetBtn = document.getElementById("resetBtn");
 const lapBtn = document.getElementById("lapBtn");
-const hrsDisplay = document.getElementById("timerHrs");
 const minDisplay = document.getElementById("timerMin");
 const secDisplay = document.getElementById("timerSec");
 const milisecDisplay = document.getElementById("timerMilisec");
@@ -31,11 +28,6 @@ const start = () => {
     if (seconds / 60 === 1) {
       seconds = 0;
       minutes++;
-
-      if (minutes / 60 === 1) {
-        minutes = 0;
-        hours++;
-      }
     }
   }
 
@@ -55,11 +47,6 @@ const start = () => {
     displayMinutes = "0" + minutes.toString();
   }
 
-  if (hours < 10) {
-    displayHours = "0" + hours.toString();
-  }
-
-  hrsDisplay.innerHTML = displayHours;
   minDisplay.innerHTML = displayMinutes;
   secDisplay.innerHTML = displaySeconds;
   milisecDisplay.innerHTML = displayMiliseconds;
@@ -80,11 +67,9 @@ startBtn.addEventListener("click", () => {
 
 resetBtn.addEventListener("click", () => {
   window.clearInterval(interval);
-  hours = 0;
   minutes = 0;
   seconds = 0;
   miliseconds = 0;
-  hrsDisplay.innerHTML = "00";
   minDisplay.innerHTML = "00";
   secDisplay.innerHTML = "00";
   milisecDisplay.innerHTML = "00";
@@ -96,7 +81,7 @@ resetBtn.addEventListener("click", () => {
 
 lapBtn.addEventListener("click", () => {
   if (displayStatus === "started") {
-    lapNow = `${displayHours}:${displayMinutes}:${displaySeconds}.${displayMiliseconds}`;
+    lapNow = `${displayMinutes}:${displaySeconds}.${displayMiliseconds}`;
     const lapList = document.getElementById("lapRecord");
     const li = document.createElement("li");
     li.innerHTML = lapNow;
